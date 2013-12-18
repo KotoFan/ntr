@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ERES.Net
+namespace ERES.Net.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
