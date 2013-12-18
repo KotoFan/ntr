@@ -28,7 +28,7 @@
                             <Label Content="Grupa:"/>
                             <ComboBox/>
                         </DockPanel>
-                        <ListBox />
+                        <ListBox ItemsSource="{Binding Students}"/>
                     </DockPanel>
 
                     <DockPanel Grid.Column="1" Margin="10" >

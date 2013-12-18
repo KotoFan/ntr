@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace ERES.Net.View
 {
     /// <summary>
@@ -23,6 +24,8 @@ namespace ERES.Net.View
         public MainWindow()
         {
             InitializeComponent();
+
+            this.DataContext = new ViewModel.MainWindowViewModel();
         }
     }
 }
