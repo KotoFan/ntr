@@ -1,0 +1,325 @@
+﻿<Window x:Class="ERES.Net.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="EresMVVM" Height="370" Width="525" MinHeight="370" MinWidth="525">
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Margin"  Value="5"/>
+            <Setter Property="Width"  Value="100"/>
+            <Setter Property="Height"  Value="30"/>
+        </Style>
+        <Style TargetType="{x:Type DockPanel}">
+            <Setter Property="Margin"  Value="0,0,0,10"/>
+        </Style>
+    </Window.Resources>
+
+        <Grid>
+       
+        <TabControl>
+            <TabItem Header="Lista studentów">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                  
+                        <ColumnDefinition Width="50*"/>
+                        <ColumnDefinition Width="50*" />
+                    </Grid.ColumnDefinitions>
+                    <DockPanel Grid.Column="0"  Margin="10" >
+                        <DockPanel  DockPanel.Dock="Top">
+                            <Label Content="Grupa:"/>
+                            <ComboBox/>
+                        </DockPanel>
+                        <ListBox />
+                    </DockPanel>
+
+                    <DockPanel Grid.Column="1" Margin="10" >
+                        <DockPanel.Resources>
+                            <Style TargetType="{x:Type Label}">
+                                <Setter Property="Width"  Value="61"/>
+                            </Style>
+                        </DockPanel.Resources>
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Imię:"/>
+                            <TextBox/>
+                        </DockPanel>
+                        <DockPanel  DockPanel.Dock="Top">
+                            <Label Content="Nazwisko:"/>
+                            <TextBox />
+                        </DockPanel>
+
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                            <Button Content="Dodaj"/>
+                            <Button Content="Usuń"/>
+                            <Button Content="Modyfikuj"/>
+                        </StackPanel>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+            
+            <TabItem Header="Studenci">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*" />
+                        <ColumnDefinition Width="50*" />
+                    </Grid.ColumnDefinitions>
+                    <DockPanel Margin="10" Grid.Column="0">
+                        <ListBox />
+                    </DockPanel>
+
+                    <DockPanel Grid.Column="1"  Margin="10" >
+                        <DockPanel.Resources>
+                            <Style TargetType="{x:Type Label}">
+                                <Setter Property="Width"  Value="65"/>
+                            </Style>
+                        </DockPanel.Resources>
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Semestr:"/>
+                            <ComboBox/>
+                        </DockPanel>
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Przedmiot:"/>
+                            <ComboBox/>
+                        </DockPanel>
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                            <Button Content="Dodaj"/>
+                            <Button Content="Usuń"/>
+                            <Button Content="Modyfikuj"/>
+                        </StackPanel>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Grupy">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*" />
+                        <ColumnDefinition Width="50*" />
+                    </Grid.ColumnDefinitions>
+                    <DockPanel Grid.Column="0" Margin="10">
+                        <ListBox />
+                    </DockPanel>
+
+                    <DockPanel Grid.Column="1"  Margin="10" >
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Nazwa:" Width="61"/>
+                            <TextBox />
+                        </DockPanel>
+
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                            <Button Content="Button"/>
+                            <Button Content="Button"/>
+                            <Button Content="Button"/>
+                        </StackPanel>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Przedmioty">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*" />
+                        <ColumnDefinition Width="50*" />
+                    </Grid.ColumnDefinitions>
+                    <DockPanel Grid.Column="0" Margin="10">
+                        <ListBox />
+                    </DockPanel>
+
+                    <DockPanel Grid.Column="1"  Margin="10" >
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Nazwa:" Width="61"/>
+                            <TextBox />
+                        </DockPanel>
+
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                            <Button Content="Dodaj"/>
+                            <Button Content="Usuń"/>
+                            <Button Content="Modyfikuj"/>
+                        </StackPanel>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Realizacje">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*" />
+                        <ColumnDefinition Width="50*" />
+                    </Grid.ColumnDefinitions>
+                    <DockPanel Grid.Column="0" Margin="10">
+                        <ListBox />
+                    </DockPanel>
+
+                    <DockPanel Grid.Column="1"  Margin="10" >
+                        <DockPanel.Resources>
+                            <Style TargetType="{x:Type Label}">
+                                <Setter Property="Width"  Value="65"/>
+                            </Style>
+                        </DockPanel.Resources>
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Semestr:"/>
+                            <ComboBox/>
+                        </DockPanel>
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Przedmiot:"/>
+                            <ComboBox/>
+                        </DockPanel>
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                            <Button Content="Dodaj"/>
+                            <Button Content="Usuń"/>
+                            <Button Content="Modyfikuj"/>
+                        </StackPanel>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Semestry">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*" />
+                        <ColumnDefinition Width="50*" />
+                    </Grid.ColumnDefinitions>
+                    <DockPanel Grid.Column="0" Margin="10">
+                        <ListBox />
+                    </DockPanel>
+
+                    <DockPanel Grid.Column="1"  Margin="10" >
+                        <DockPanel.Resources>
+                            <Style TargetType="{x:Type Label}">
+                                <Setter Property="Width"  Value="65"/>
+                            </Style>
+                        </DockPanel.Resources>
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Semestr:"/>
+                            <TextBox/>
+                        </DockPanel>
+                        
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                            <Button Content="Dodaj"/>
+                            <Button Content="Usuń"/>
+                            <Button Content="Modyfikuj"/>
+                        </StackPanel>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Realizacja-oceny">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*" />
+                        <ColumnDefinition Width="50*" />
+                    </Grid.ColumnDefinitions>
+                    <DockPanel Grid.Column="0" Margin="10">
+                        <ListBox />
+                    </DockPanel>
+
+                    <DockPanel Grid.Column="1"  Margin="10" >
+                        <DockPanel.Resources>
+                            <Style TargetType="{x:Type Label}">
+                                <Setter Property="Width"  Value="65"/>
+                            </Style>
+                        </DockPanel.Resources>
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Semestr:"/>
+                            <ComboBox/>
+                        </DockPanel>
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Przedmiot:"/>
+                            <ComboBox/>
+                        </DockPanel>
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Ocena:"/>
+                            <TextBox/>
+                        </DockPanel>
+
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                            <Button Content="Dodaj"/>
+                            <Button Content="Usuń"/>
+                            <Button Content="Modyfikuj"/>
+                        </StackPanel>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Oceny">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*" />
+                        <ColumnDefinition Width="50*" />
+                    </Grid.ColumnDefinitions>
+                    <DockPanel Grid.Column="0" Margin="10">
+                        <ListBox />
+                    </DockPanel>
+
+                    <DockPanel Grid.Column="1"  Margin="10" >
+                        <DockPanel.Resources>
+                            <Style TargetType="{x:Type Label}">
+                                <Setter Property="Width"  Value="65"/>
+                            </Style>
+                        </DockPanel.Resources>
+
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Realizacja:"/>
+                            <ComboBox/>
+                        </DockPanel>
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Student:"/>
+                            <ComboBox/>
+                        </DockPanel>
+                        
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Ocena:"/>
+                            <ComboBox/>
+                        </DockPanel>
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Wartość:"/>
+                            <TextBox/>
+                        </DockPanel>
+
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                            <Button Content="Dodaj"/>
+                            <Button Content="Usuń"/>
+                            <Button Content="Modyfikuj"/>
+                        </StackPanel>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Rejestracje">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*" />
+                        <ColumnDefinition Width="50*" />
+                    </Grid.ColumnDefinitions>
+                    <DockPanel Grid.Column="0" Margin="10">
+                        <ListBox />
+                    </DockPanel>
+
+                    <DockPanel Grid.Column="1"  Margin="10" >
+                        <DockPanel.Resources>
+                            <Style TargetType="{x:Type Label}">
+                                <Setter Property="Width"  Value="65"/>
+                            </Style>
+                        </DockPanel.Resources>
+
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Realizacja:"/>
+                            <ComboBox/>
+                        </DockPanel>
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Student:"/>
+                            <ComboBox/>
+                        </DockPanel>
+                        
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                            <Button Content="Dodaj"/>
+                            <Button Content="Usuń"/>
+                            <Button Content="Modyfikuj"/>
+                        </StackPanel>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
+            
+
+    </Grid>
+</Window>
