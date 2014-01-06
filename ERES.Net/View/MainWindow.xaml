@@ -7,6 +7,7 @@
             <Setter Property="Margin"  Value="5"/>
             <Setter Property="Width"  Value="100"/>
             <Setter Property="Height"  Value="30"/>
+            <Setter Property="Command" Value="{Binding ButtonCommand}" />
         </Style>
         <Style TargetType="{x:Type DockPanel}">
             <Setter Property="Margin"  Value="0,0,0,10"/>
@@ -14,10 +15,11 @@
     </Window.Resources>
 
         <Grid>
-       
+        
         <TabControl>
             <TabItem Header="Lista studentów">
                 <Grid>
+
                     <Grid.ColumnDefinitions>
                   
                         <ColumnDefinition Width="50*"/>
@@ -26,9 +28,9 @@
                     <DockPanel Grid.Column="0"  Margin="10" >
                         <DockPanel  DockPanel.Dock="Top">
                             <Label Content="Grupa:"/>
-                            <ComboBox/>
+                            <ComboBox ItemsSource="{Binding Groups}" SelectedItem="{Binding Path=SelectedGroup , Mode=TwoWay}"/>
                         </DockPanel>
-                        <ListBox ItemsSource="{Binding Students}"/>
+                        <ListBox ItemsSource="{Binding Students}" SelectedItem="{Binding Path=SelectedStudent , Mode=TwoWay}"/>
                     </DockPanel>
 
                     <DockPanel Grid.Column="1" Margin="10" >
@@ -39,55 +41,25 @@
                         </DockPanel.Resources>
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Imię:"/>
-                            <TextBox/>
+                           
+                            <TextBox Text="{Binding Path=Imie}" />
+                           
                         </DockPanel>
                         <DockPanel  DockPanel.Dock="Top">
                             <Label Content="Nazwisko:"/>
-                            <TextBox />
+                            <TextBox Text="{Binding Path=Nazwisko}"/>
                         </DockPanel>
 
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
-                            <Button Content="Dodaj"/>
-                            <Button Content="Usuń"/>
-                            <Button Content="Modyfikuj"/>
+                            <Button Content="Dodaj" Command="{Binding StudentsCommands}" CommandParameter="AddStudent" IsEnabled="{Binding StudentListAddButtonActive}"/>
+                            <Button Content="Usuń"  Command="{Binding StudentsCommands}" CommandParameter="DeleteStudent" IsEnabled="{Binding StudentListUpdateDeleteButtonActive}"/>
+                            <Button Content="Modyfikuj"  Command="{Binding StudentsCommands}" CommandParameter="UpdateStudent" IsEnabled="{Binding StudentListUpdateDeleteButtonActive}"/>
                         </StackPanel>
                     </DockPanel>
                 </Grid>
             </TabItem>
             
-            <TabItem Header="Studenci">
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="50*" />
-                        <ColumnDefinition Width="50*" />
-                    </Grid.ColumnDefinitions>
-                    <DockPanel Margin="10" Grid.Column="0">
-                        <ListBox />
-                    </DockPanel>
-
-                    <DockPanel Grid.Column="1"  Margin="10" >
-                        <DockPanel.Resources>
-                            <Style TargetType="{x:Type Label}">
-                                <Setter Property="Width"  Value="65"/>
-                            </Style>
-                        </DockPanel.Resources>
-                        <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Semestr:"/>
-                            <ComboBox/>
-                        </DockPanel>
-                        <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Przedmiot:"/>
-                            <ComboBox/>
-                        </DockPanel>
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
-                            <Button Content="Dodaj"/>
-                            <Button Content="Usuń"/>
-                            <Button Content="Modyfikuj"/>
-                        </StackPanel>
-                    </DockPanel>
-                </Grid>
-            </TabItem>
             <TabItem Header="Grupy">
 
                 <Grid>
@@ -96,19 +68,19 @@
                         <ColumnDefinition Width="50*" />
                     </Grid.ColumnDefinitions>
                     <DockPanel Grid.Column="0" Margin="10">
-                        <ListBox />
+                        <ListBox  ItemsSource="{Binding Groups}" SelectedItem="{Binding Path=SelectedGroup, Mode=TwoWay}"/>
                     </DockPanel>
 
                     <DockPanel Grid.Column="1"  Margin="10" >
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Nazwa:" Width="61"/>
-                            <TextBox />
+                            <TextBox Text="{Binding Grupa}"/>
                         </DockPanel>
 
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
-                            <Button Content="Button"/>
-                            <Button Content="Button"/>
-                            <Button Content="Button"/>
+                            <Button Content="Dodaj" Command="{Binding GroupCommands}" CommandParameter="AddGroup"/>
+                            <Button Content="Usuń"  Command="{Binding GroupCommands}" CommandParameter="DeleteGroup" IsEnabled="{Binding GroupListUpdateDeleteButtonActive, Mode=TwoWay}"/>
+                            <Button Content="Modyfikuj"  Command="{Binding GroupCommands}" CommandParameter="UpdateGroup" IsEnabled="{Binding GroupListUpdateDeleteButtonActive}"/>
                         </StackPanel>
                     </DockPanel>
                 </Grid>
@@ -121,7 +93,7 @@
                         <ColumnDefinition Width="50*" />
                     </Grid.ColumnDefinitions>
                     <DockPanel Grid.Column="0" Margin="10">
-                        <ListBox />
+                        <ListBox   ItemsSource="{Binding Subjects}" SelectedItem="{Binding Path=SelectedSubject, Mode=TwoWay}" />
                     </DockPanel>
 
                     <DockPanel Grid.Column="1"  Margin="10" >

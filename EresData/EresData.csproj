@@ -83,7 +83,6 @@
     <Compile Include="Semesters.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="StorageContext.cs" />
     <Compile Include="Students.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

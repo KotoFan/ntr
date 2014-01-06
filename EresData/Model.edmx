@@ -231,7 +231,7 @@
           <Property Name="RealisationID" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MaxValue" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" ConcurrencyMode="Fixed" />
           <NavigationProperty Name="Realisations" Relationship="Self.FK_Grades_Realisations" FromRole="Grades" ToRole="Realisations" />
           <NavigationProperty Name="GradeValues" Relationship="Self.FK_GradeValues_Grades" FromRole="Grades" ToRole="GradeValues" />
         </EntityType>
@@ -244,7 +244,7 @@
           <Property Name="RegistrationID" Type="Int32" Nullable="false" />
           <Property Name="Value" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Date" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" ConcurrencyMode="Fixed" />
           <NavigationProperty Name="Grades" Relationship="Self.FK_GradeValues_Grades" FromRole="GradeValues" ToRole="Grades" />
           <NavigationProperty Name="Registrations" Relationship="Self.FK_GradeValues_Registrations" FromRole="GradeValues" ToRole="Registrations" />
         </EntityType>
@@ -253,7 +253,7 @@
             <PropertyRef Name="GroupID" />
           </Key>
           <Property Name="GroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" ConcurrencyMode="Fixed" />
           <NavigationProperty Name="Students" Relationship="Self.FK_Students_Groups" FromRole="Groups" ToRole="Students" />
         </EntityType>
         <EntityType Name="Realisations">
@@ -263,7 +263,7 @@
           <Property Name="RealisationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SubjectID" Type="Int32" Nullable="false" />
           <Property Name="SemesterID" Type="Int32" Nullable="false" />
-          <Property Name="TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" ConcurrencyMode="Fixed" />
           <NavigationProperty Name="Grades" Relationship="Self.FK_Grades_Realisations" FromRole="Realisations" ToRole="Grades" />
           <NavigationProperty Name="Semesters" Relationship="Self.FK_Realisations_Semesters" FromRole="Realisations" ToRole="Semesters" />
           <NavigationProperty Name="Subjects" Relationship="Self.FK_Realisations_Subjects" FromRole="Realisations" ToRole="Subjects" />
@@ -276,7 +276,7 @@
           <Property Name="RegistrationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StudentID" Type="Int32" Nullable="false" />
           <Property Name="RealisationID" Type="Int32" Nullable="false" />
-          <Property Name="TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" ConcurrencyMode="Fixed" />
           <NavigationProperty Name="GradeValues" Relationship="Self.FK_GradeValues_Registrations" FromRole="Registrations" ToRole="GradeValues" />
           <NavigationProperty Name="Realisations" Relationship="Self.FK_Registrations_Realisations" FromRole="Registrations" ToRole="Realisations" />
           <NavigationProperty Name="Students" Relationship="Self.FK_Registrations_Students" FromRole="Registrations" ToRole="Students" />
@@ -287,7 +287,7 @@
           </Key>
           <Property Name="SemesterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" ConcurrencyMode="Fixed" />
           <NavigationProperty Name="Realisations" Relationship="Self.FK_Realisations_Semesters" FromRole="Semesters" ToRole="Realisations" />
         </EntityType>
         <EntityType Name="Students">
@@ -299,7 +299,7 @@
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="GroupID" Type="Int32" Nullable="false" />
           <Property Name="IndexNo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" ConcurrencyMode="Fixed" />
           <NavigationProperty Name="Groups" Relationship="Self.FK_Students_Groups" FromRole="Students" ToRole="Groups" />
           <NavigationProperty Name="Registrations" Relationship="Self.FK_Registrations_Students" FromRole="Students" ToRole="Registrations" />
         </EntityType>
@@ -311,7 +311,7 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Conspect" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="url" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" ConcurrencyMode="Fixed" />
           <NavigationProperty Name="Realisations" Relationship="Self.FK_Realisations_Subjects" FromRole="Subjects" ToRole="Realisations" />
         </EntityType>
         <Association Name="FK_Grades_Realisations">

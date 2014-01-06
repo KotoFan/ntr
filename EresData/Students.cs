@@ -28,5 +28,10 @@ namespace EresData
     
         public virtual Groups Groups { get; set; }
         public virtual ICollection<Registrations> Registrations { get; set; }
+
+        public override string ToString()
+        {
+            return FirstName + " " + LastName + " " + IndexNo;
+        }
     }
 }
