@@ -12,6 +12,19 @@
         <Style TargetType="{x:Type DockPanel}">
             <Setter Property="Margin"  Value="0,0,0,10"/>
         </Style>
+        <Style TargetType="TextBox">
+
+            <Style.Triggers>
+
+                <Trigger Property="Validation.HasError" Value="true">
+
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors).CurrentItem.ErrorContent}" />
+
+                </Trigger>
+
+            </Style.Triggers>
+
+        </Style>
     </Window.Resources>
 
         <Grid>
@@ -28,7 +41,7 @@
                     <DockPanel Grid.Column="0"  Margin="10" >
                         <DockPanel  DockPanel.Dock="Top">
                             <Label Content="Grupa:"/>
-                            <ComboBox ItemsSource="{Binding Groups}" SelectedItem="{Binding Path=SelectedGroup , Mode=TwoWay}"/>
+                            <ComboBox ItemsSource="{Binding Groups}" SelectedItem="{Binding Path=StudentSelectedGroup , Mode=TwoWay}"/>
                         </DockPanel>
                         <ListBox ItemsSource="{Binding Students}" SelectedItem="{Binding Path=SelectedStudent , Mode=TwoWay}"/>
                     </DockPanel>
@@ -41,13 +54,13 @@
                         </DockPanel.Resources>
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Imię:"/>
-                           
-                            <TextBox Text="{Binding Path=Imie}" />
+
+                            <TextBox Text="{Binding Path=Imie, ValidatesOnDataErrors=True}" />
                            
                         </DockPanel>
                         <DockPanel  DockPanel.Dock="Top">
                             <Label Content="Nazwisko:"/>
-                            <TextBox Text="{Binding Path=Nazwisko}"/>
+                            <TextBox Text="{Binding Path=Nazwisko, ValidatesOnDataErrors=True}"/>
                         </DockPanel>
 
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
@@ -93,19 +106,19 @@
                         <ColumnDefinition Width="50*" />
                     </Grid.ColumnDefinitions>
                     <DockPanel Grid.Column="0" Margin="10">
-                        <ListBox   ItemsSource="{Binding Subjects}" SelectedItem="{Binding Path=SelectedSubject, Mode=TwoWay}" />
+                        <ListBox  ItemsSource="{Binding Subjects}" SelectedItem="{Binding Path=SelectedSubject, Mode=TwoWay}" />
                     </DockPanel>
 
                     <DockPanel Grid.Column="1"  Margin="10" >
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Nazwa:" Width="61"/>
-                            <TextBox />
+                            <TextBox Text="{Binding Przedmiot}"/>
                         </DockPanel>
 
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
-                            <Button Content="Dodaj"/>
-                            <Button Content="Usuń"/>
-                            <Button Content="Modyfikuj"/>
+                            <Button Content="Dodaj" Command="{Binding SubjectCommands}" CommandParameter="Add"/>
+                            <Button Content="Usuń" Command="{Binding SubjectCommands}" CommandParameter="Delete" />
+                            <Button Content="Modyfikuj" Command="{Binding SubjectCommands}" CommandParameter="Update"/>
                         </StackPanel>
                     </DockPanel>
                 </Grid>
@@ -118,7 +131,7 @@
                         <ColumnDefinition Width="50*" />
                     </Grid.ColumnDefinitions>
                     <DockPanel Grid.Column="0" Margin="10">
-                        <ListBox />
+                        <ListBox ItemsSource="{Binding Realisations}" SelectedItem="{Binding Path=SelectedRealisation, Mode=TwoWay}" />
                     </DockPanel>
 
                     <DockPanel Grid.Column="1"  Margin="10" >
@@ -129,16 +142,16 @@
                         </DockPanel.Resources>
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Semestr:"/>
-                            <ComboBox/>
+                            <ComboBox  ItemsSource="{Binding Semesters}" SelectedItem="{Binding Path=RealisationSelectedSemester}"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Przedmiot:"/>
-                            <ComboBox/>
+                            <ComboBox ItemsSource="{Binding Subjects}" SelectedItem="{Binding Path=RealisationSelectedSubject}"/>
                         </DockPanel>
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
-                            <Button Content="Dodaj"/>
-                            <Button Content="Usuń"/>
-                            <Button Content="Modyfikuj"/>
+                            <Button Content="Dodaj" Command="{Binding RealisationCommands}" CommandParameter="Add"/>
+                            <Button Content="Usuń" Command="{Binding RealisationCommands}" CommandParameter="Delete" />
+                            <Button Content="Modyfikuj" Command="{Binding RealisationCommands}" CommandParameter="Update"/>
                         </StackPanel>
                     </DockPanel>
                 </Grid>
@@ -151,7 +164,7 @@
                         <ColumnDefinition Width="50*" />
                     </Grid.ColumnDefinitions>
                     <DockPanel Grid.Column="0" Margin="10">
-                        <ListBox />
+                        <ListBox  ItemsSource="{Binding Semesters}" SelectedItem="{Binding Path=SemestersSelectedSemester, Mode=TwoWay}"/>
                     </DockPanel>
 
                     <DockPanel Grid.Column="1"  Margin="10" >
@@ -162,13 +175,13 @@
                         </DockPanel.Resources>
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Semestr:"/>
-                            <TextBox/>
+                            <TextBox Text="{Binding Semestr}"/>
                         </DockPanel>
                         
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
-                            <Button Content="Dodaj"/>
-                            <Button Content="Usuń"/>
-                            <Button Content="Modyfikuj"/>
+                            <Button Content="Dodaj" Command="{Binding SemesterCommands}" CommandParameter="Add"/>
+                            <Button Content="Usuń" Command="{Binding SemesterCommands}" CommandParameter="Delete" />
+                            <Button Content="Modyfikuj" Command="{Binding SemesterCommands}" CommandParameter="Update"/>
                         </StackPanel>
                     </DockPanel>
                 </Grid>
@@ -181,7 +194,7 @@
                         <ColumnDefinition Width="50*" />
                     </Grid.ColumnDefinitions>
                     <DockPanel Grid.Column="0" Margin="10">
-                        <ListBox />
+                        <ListBox ItemsSource="{Binding Grades}" SelectedItem="{Binding Path=SelectedGrade, Mode=TwoWay}"/>
                     </DockPanel>
 
                     <DockPanel Grid.Column="1"  Margin="10" >
@@ -191,16 +204,13 @@
                             </Style>
                         </DockPanel.Resources>
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Semestr:"/>
-                            <ComboBox/>
+                            <Label Content="Realizacja:"/>
+                            <ComboBox  ItemsSource="{Binding Realisations}" SelectedItem="{Binding Path=GradeSelectedRealisation}"/>
                         </DockPanel>
-                        <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Przedmiot:"/>
-                            <ComboBox/>
-                        </DockPanel>
+
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Ocena:"/>
-                            <TextBox/>
+                            <TextBox Text="{Binding Ocena}"/>
                         </DockPanel>
 
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">

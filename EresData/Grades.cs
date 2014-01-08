@@ -11,21 +11,31 @@ namespace EresData
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
     public partial class Grades
     {
         public Grades()
         {
             this.GradeValues = new HashSet<GradeValues>();
         }
-    
+
         public int GradeID { get; set; }
         public int RealisationID { get; set; }
         public string Name { get; set; }
         public string MaxValue { get; set; }
         public byte[] TimeStamp { get; set; }
-    
+
         public virtual Realisations Realisations { get; set; }
         public virtual ICollection<GradeValues> GradeValues { get; set; }
+
+        public override string ToString()
+        {
+            using (var db = new EresEntities())
+            {
+
+
+                return db.Realisations.Include("Semesters").Include("Subjects").Where(x => x.RealisationID == RealisationID).First() + "\t" + Name;
+            }
+        }
     }
 }

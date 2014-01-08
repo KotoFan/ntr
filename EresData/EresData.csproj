@@ -89,6 +89,7 @@
     <Compile Include="Subjects.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Wrappers\RealisationWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Model.edmx">

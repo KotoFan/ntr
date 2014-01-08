@@ -29,5 +29,10 @@ namespace EresData
         public virtual Semesters Semesters { get; set; }
         public virtual Subjects Subjects { get; set; }
         public virtual ICollection<Registrations> Registrations { get; set; }
+
+        public override string ToString()
+        {
+            return Semesters.Name + " " +  Subjects.Name;
+        }
     }
 }

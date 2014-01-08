@@ -33,5 +33,7 @@ namespace EresData
         public virtual DbSet<Semesters> Semesters { get; set; }
         public virtual DbSet<Students> Students { get; set; }
         public virtual DbSet<Subjects> Subjects { get; set; }
+
+
     }
 }
