@@ -1,0 +1,29 @@
+﻿@model KalkulatorMVC.Models.HomeModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>@Model.Test</h2>
+
+
+@using (Html.BeginForm())
+{@Html.ValidationSummary()
+
+  
+    <button type="submit">Submit</button> 
+    <button name="button" value="n7">7</button>
+    <button name="button" value="n8">8</button>
+    <button name="button" value="n9">9</button>
+    <button name="button" value="oDivide">/</button>
+    <button name="button" value="oSqrt">Sqrt</button>
+
+    <button name="button" value="n4">4</button>
+    <button name="button" value="n5">5</button>
+    <button name="button" value="n6">6</button>
+    <button name="button" value="oMultiply">*</button>
+    
+    <button name="button" value="n1">1</button>
+    <button name="button" value="n2">2</button>
+    <button name="button" value="n3">3</button>
+    
+}

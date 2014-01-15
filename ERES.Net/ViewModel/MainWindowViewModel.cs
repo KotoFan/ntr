@@ -21,6 +21,7 @@ namespace ERES.Net.ViewModel
         public ICommand SubjectCommands { get; set; }
         public ICommand RealisationCommands { get; set; }
         public ICommand SemesterCommands { get; set; }
+        public ICommand GradeCommands { get; set; }
 
         private bool synchroStudentCheck = true;
 
@@ -256,7 +257,7 @@ namespace ERES.Net.ViewModel
 
                 _realisationSelectedSemester = value;
 
-                OnPropertyChanged("SelectedSemester");
+                OnPropertyChanged("RealisationSelectedSemester");
 
 
             }
@@ -348,7 +349,7 @@ namespace ERES.Net.ViewModel
             }
             set
             {
-                _semestr = value;
+                _semestr = value.Replace(" ", string.Empty);
                 OnPropertyChanged("Semestr");
             }
         }
@@ -401,6 +402,20 @@ namespace ERES.Net.ViewModel
                 OnPropertyChanged("Ocena");
             }
         }
+        private String _gradeValue;
+        //Dla tb w zakldce grupy
+        public String GradeValue
+        {
+            get
+            {
+                return _gradeValue;
+            }
+            set
+            {
+                _gradeValue = value;
+                OnPropertyChanged("GradeValue");
+            }
+        }
         private EresData.Realisations _gradeSelectedRealisation;
         public EresData.Realisations GradeSelectedRealisation
         {
@@ -415,8 +430,33 @@ namespace ERES.Net.ViewModel
                     return;
 
                 _gradeSelectedRealisation = value;
-
+                Grades = model.getRealisationGrades(_gradeSelectedRealisation.RealisationID);
                 OnPropertyChanged("GradeSelectedRealisation");
+
+
+            }
+        }
+
+        private EresData.Grades _gradeSelectedGrade;
+        public EresData.Grades GradeSelectedGrade
+        {
+            get
+            {
+                return _gradeSelectedGrade;
+            }
+
+            set
+            {
+                if (value == null)
+                    return;
+                if (value == _gradeSelectedGrade)
+                    return;
+
+                _gradeSelectedGrade = value;
+                Ocena = _gradeSelectedGrade.Name;
+                GradeValue = _gradeSelectedGrade.MaxValue;
+                GradeSelectedRealisation = Realisations.Where(x => x.RealisationID == _gradeSelectedGrade.RealisationID).First();
+                OnPropertyChanged("GradeSelectedGrade");
 
 
             }
@@ -624,26 +664,8 @@ namespace ERES.Net.ViewModel
 
            }));
 
-            SubjectCommands = new RelayCommand(
-new Action<object>(delegate(object obj)
-{
-    switch (obj as string)
-    {
-        case "Add":
-            model.addSubject(Przedmiot);
-            break;
-        case "Delete":
-            model.delSubject(SelectedSubject);
-            break;
-        case "Update":
-            model.updateSubject(Przedmiot, SelectedSubject);
-            break;
-
-    }
-    Subjects = model.getSubjects();
 
 
-}));
 
             SemesterCommands = new RelayCommand(
 new Action<object>(delegate(object obj)
@@ -654,14 +676,34 @@ new Action<object>(delegate(object obj)
             model.addSemester(Semestr);
             break;
         case "Delete":
-            model.delSubject(SelectedSubject);
+            model.delSemester(SemestersSelectedSemester);
             break;
         case "Update":
-            model.updateSubject(Przedmiot, SelectedSubject);
+            model.updateSemesters(Semestr, SemestersSelectedSemester);
             break;
 
     }
     Semesters = model.getSemesters();
+
+
+}));
+            GradeCommands = new RelayCommand(
+new Action<object>(delegate(object obj)
+{
+    switch (obj as string)
+    {
+        case "Add":
+            model.addGrade(Ocena, GradeValue, GradeSelectedRealisation);
+            break;
+        case "Delete":
+            model.delGrade(GradeSelectedGrade);
+            break;
+        case "Update":
+            model.updateGrade(Ocena, GradeValue, GradeSelectedRealisation, GradeSelectedGrade);
+            break;
+
+    }
+    Grades = model.getRealisationGrades(GradeSelectedRealisation.RealisationID);
 
 
 }));

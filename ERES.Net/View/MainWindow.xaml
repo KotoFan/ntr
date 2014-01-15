@@ -194,7 +194,7 @@
                         <ColumnDefinition Width="50*" />
                     </Grid.ColumnDefinitions>
                     <DockPanel Grid.Column="0" Margin="10">
-                        <ListBox ItemsSource="{Binding Grades}" SelectedItem="{Binding Path=SelectedGrade, Mode=TwoWay}"/>
+                        <ListBox ItemsSource="{Binding Grades}" SelectedItem="{Binding Path=GradeSelectedGrade, Mode=TwoWay}"/>
                     </DockPanel>
 
                     <DockPanel Grid.Column="1"  Margin="10" >
@@ -212,11 +212,15 @@
                             <Label Content="Ocena:"/>
                             <TextBox Text="{Binding Ocena}"/>
                         </DockPanel>
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Wartość:"/>
+                            <TextBox Text="{Binding GradeValue}"/>
+                        </DockPanel>
 
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
-                            <Button Content="Dodaj"/>
-                            <Button Content="Usuń"/>
-                            <Button Content="Modyfikuj"/>
+                            <Button Content="Dodaj" Command="{Binding GradeCommands}" CommandParameter="Add"/>
+                            <Button Content="Usuń" Command="{Binding GradeCommands}" CommandParameter="Delete" />
+                            <Button Content="Modyfikuj" Command="{Binding GradeCommands}" CommandParameter="Update"/>
                         </StackPanel>
                     </DockPanel>
                 </Grid>

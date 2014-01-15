@@ -34,7 +34,7 @@ namespace EresData
             {
 
 
-                return db.Realisations.Include("Semesters").Include("Subjects").Where(x => x.RealisationID == RealisationID).First() + "\t" + Name;
+                return db.Realisations.Include("Semesters").Include("Subjects").Where(x => x.RealisationID == RealisationID).First() + "\t" + Name + "\t" + MaxValue;
             }
         }
     }
