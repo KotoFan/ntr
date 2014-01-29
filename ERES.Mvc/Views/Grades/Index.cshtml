@@ -1,0 +1,48 @@
+﻿@model IEnumerable<EresData.Grades>
+
+@{
+    ViewBag.Title = "Typy ocen";
+}
+
+<h2>Typy ocen</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", "Home", new { @class = "btn btn-primary" })
+</p>
+<table class="table table-striped">
+    <tr>
+        <th>Id
+        </th>
+        <th>Realizacja
+        </th>
+        <th>Nazwa
+        </th>
+        <th>Wartość
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GradeID)
+            </td>
+            <td>
+               @(item.Realisations.Semesters.Name + " - " + item.Realisations.Subjects.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxValue)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.GradeID }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+
+</table>

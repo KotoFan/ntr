@@ -1,0 +1,29 @@
+﻿@model ERES.Mvc.Models.GradeValuesModels.TeacherLists
+
+@{
+    ViewBag.Title = "Teacher";
+}
+
+<h2>Teacher</h2>
+
+@using (Html.BeginForm()) {
+
+
+    <fieldset>
+        <legend>Students</legend>
+
+            @Html.DropDownList("realisationId", Model.realisationList, new { @class = "form-control", })
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
