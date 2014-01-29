@@ -1,17 +1,17 @@
 ﻿
 using System;
-using System.Data;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity.Core;
 using System.Data.Entity.Infrastructure;
-using EresData.Wrappers;
+using EresData2.Wrappers;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
 
-namespace EresData
+namespace EresData2
 {
     public class Model
     {
@@ -453,6 +453,45 @@ namespace EresData
 
         }
 
+        public List<Students> getRealisationStudents(Realisations r)
+        {
+            using (var db = new EresEntities())
+            {
+                var ob = (from reg in db.Registrations
+                          join s in db.Students on reg.StudentID equals s.StudentID
+                          where reg.RealisationID == r.RealisationID
+                          select s).ToList();
+                return ob;
+            }
+
+        }
+        public List<Grades> getRealisationGrades(Realisations r)
+        {
+            using (var db = new EresEntities())
+            {
+                return db.Grades.Where(x => x.RealisationID == r.RealisationID).ToList();
+            }
+
+        }
+        public List<GradeValues> getStudentRealisationGradesValues(Realisations r, Students s)
+        {
+            using (var db = new EresEntities())
+            {
+                var ob = (from reg in db.Registrations
+                          join gradeVal in db.GradeValues on reg.RegistrationID equals gradeVal.RegistrationID
+                          where reg.RealisationID == r.RealisationID && reg.StudentID == s.StudentID
+                          select gradeVal).ToList();
+               
+                List<GradeValues> ret = new List<GradeValues>();
+
+                foreach(var y in ob){
+
+                    ret.Add(db.GradeValues.Include("Grades").Where(x => x.GradeValueID == y.GradeValueID).First());
+                }
+
+                return ret;
+            }
+        }
 
         public void addRealisation(int SemesterID, int SubjectID)
         {
@@ -621,5 +660,114 @@ namespace EresData
             }
         }
         #endregion
+
+        #region oceny
+        public List<GradeValues> getGradeValues()
+        {
+
+            using (var db = new EresEntities())
+            {
+                return db.GradeValues.Include("Registrations").Include("Grades").ToList();
+            }
+        }
+        public List<GradeValues> getRealisationGradesValues(Realisations r)
+        {
+
+            using (var db = new EresEntities())
+            {
+                return db.GradeValues.Include("Registrations").Include("Grades").Where(x => x.Registrations.RealisationID == r.RealisationID).ToList();
+            }
+        }
+
+
+        public void addGradeValue(Realisations r, Students s, Grades grade, String val)
+        {
+            using (var db = new EresEntities())
+            {
+                GradeValues g = new GradeValues();
+                g.RegistrationID = db.Registrations.Where(x => x.StudentID == s.StudentID && x.RealisationID == r.RealisationID).First().RegistrationID;
+                g.Value = val;
+                g.GradeID = grade.GradeID;
+                g.Date = DateTime.Now.ToShortDateString();
+                g.TimeStamp = BitConverter.GetBytes(DateTime.Now.ToBinary());
+                try
+                {
+                    db.GradeValues.Add(g);
+                    db.SaveChanges();
+                }
+                catch (DbEntityValidationException dbEx)
+                {
+                    foreach (var validationErrors in dbEx.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            Trace.TraceInformation("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
+                        }
+                    }
+                }
+                catch (OptimisticConcurrencyException t)
+                {
+                    Console.WriteLine(t);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+
+                }
+            }
+        }
+
+        public void delGradeValue(Grades g)
+        {
+            using (var db = new EresEntities())
+            {
+                try
+                {
+
+                    db.Grades.Attach(g);
+                    db.Grades.Remove(g);
+                    db.SaveChanges();
+                }
+                catch (OptimisticConcurrencyException t)
+                {
+                    Console.WriteLine(t);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
+        }
+
+        public void updateGradeValue(string nazwa, string wartosc, Realisations r, Grades g)
+        {
+            using (var db = new EresEntities())
+            {
+                try
+                {
+                    db.Grades.Attach(g);
+
+                    g.Name = nazwa;
+                    g.MaxValue = wartosc;
+                    g.RealisationID = r.RealisationID;
+                    db.Entry(g).State = System.Data.Entity.EntityState.Modified;
+
+                    db.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    Console.WriteLine(ex);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
+        }
+
+
+
+        #endregion
+
     }
 }

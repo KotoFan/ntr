@@ -3,27 +3,92 @@
     ViewBag.Title = "Index";
 }
 
-<h2>@Model.Test</h2>
-
 
 @using (Html.BeginForm())
 {@Html.ValidationSummary()
 
-  
-    <button type="submit">Submit</button> 
-    <button name="button" value="n7">7</button>
-    <button name="button" value="n8">8</button>
-    <button name="button" value="n9">9</button>
-    <button name="button" value="oDivide">/</button>
-    <button name="button" value="oSqrt">Sqrt</button>
+          
 
-    <button name="button" value="n4">4</button>
-    <button name="button" value="n5">5</button>
-    <button name="button" value="n6">6</button>
-    <button name="button" value="oMultiply">*</button>
-    
-    <button name="button" value="n1">1</button>
-    <button name="button" value="n2">2</button>
-    <button name="button" value="n3">3</button>
-    
+    <center>
+    <table cellpadding="3" cellspacing="0" border="0">
+        <tr>
+            <td colspan="4">
+                 <input id="val" name="val" value="@Model.Display" type="text" readonly />
+            </td>
+            <td>
+                <button name="button" value="C">C</button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                  <button name="button" value="n7">7</button>
+            </td>
+            <td>
+                   <button name="button" value="n8">8</button>
+            </td>
+            <td>
+                  <button name="button" value="n9">9</button>
+            </td>
+            <td>
+                  <button name="button" value="/">/</button>
+            </td>
+            <td>
+                <button name="button" value="sqrt">Sqrt</button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                 <button name="button" value="n4">4</button>
+            </td>
+            <td>
+                 <button name="button" value="n5">5</button>
+            </td>
+            <td>
+                 <button name="button" value="n6">6</button>
+            </td>
+            <td>
+                 <button name="button" value="*">*</button>
+            </td>
+            <td>
+                 <button name="button" value="%">%</button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                  <button name="button" value="n1">1</button>
+            </td>
+            <td>
+                  <button name="button" value="n2">2</button>
+            </td>
+            <td>
+                   <button name="button" value="n3">3</button>
+            </td>
+            <td>
+                 <button name="button" value="-">-</button>
+            </td>
+            <td rowspan="2">
+                 <button  id="eq" name="button" value="=">=</button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                   <button name="button" value="n0">0</button>
+            </td>
+            <td>
+                <button name="button" value=",">,</button>
+            </td>
+            <td>
+                 <button name="button" value="+/-">+/-</button>
+            </td>
+            <td >
+                   <button name="button" value="+">+</button>
+            </td>
+        </tr>
+    </table>
+        </center>
 }
+<link href="StyleSheet1.css" rel="stylesheet" type="text/css" />

@@ -45,42 +45,57 @@ namespace StudentList.Model
 
         public void updateStudent(Student student, string imie, string nazwisko, int groupId)
         {
-            using (var db = new StorageContext())
+            try
             {
-                var original = db.Students.Find(student.StudentId);
-                if (original != null)
+                using (var db = new StorageContext())
                 {
-                    original.Group = db.Groups.Find(groupId);
-                    original.Imie = imie;
-                    original.Nazwisko = nazwisko;
-                    try
+                    var original = db.Students.Find(student.StudentId);
+                    if (original != null)
                     {
-                        db.SaveChanges();
-                    }
-                    catch (DbEntityValidationException dbEx)
-                    {
-                        foreach (var validationErrors in dbEx.EntityValidationErrors)
+                        original.Group = db.Groups.Find(groupId);
+                        original.Imie = imie;
+                        original.Nazwisko = nazwisko;
+                        try
                         {
-                            foreach (var validationError in validationErrors.ValidationErrors)
+                            db.SaveChanges();
+                        }
+                        catch (DbEntityValidationException dbEx)
+                        {
+                            foreach (var validationErrors in dbEx.EntityValidationErrors)
                             {
-                                Trace.TraceInformation("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
+                                foreach (var validationError in validationErrors.ValidationErrors)
+                                {
+                                    Trace.TraceInformation("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
+                                }
                             }
                         }
                     }
                 }
             }
+            catch (Exception e)
+            {
+                Console.Write(e.ToString());
+
+            }
         }
 
         public void deleteStudent(Student student)
         {
-            using (var db = new StorageContext())
+            try
             {
-                var original = db.Students.Find(student.StudentId);
-                if (original != null)
+                using (var db = new StorageContext())
                 {
-                    db.Students.Remove(original);
-                    db.SaveChanges();
+                    var original = db.Students.Find(student.StudentId);
+                    if (original != null)
+                    {
+                        db.Students.Remove(original);
+                        db.SaveChanges();
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.ToString());
             }
         }
 
